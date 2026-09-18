@@ -1,0 +1,44 @@
+@startuml
+title One design system. Many clients.
+top to bottom direction
+skinparam componentStyle rectangle
+skinparam roundcorner 15
+skinparam shadowing false
+
+together {
+  component Figma
+  component Storybook
+  component Code
+  component "Claude Design" as Claude
+  component "Text Message" as Text
+}
+rectangle "Semantic Layer" as Semantic {
+  rectangle Purpose
+  rectangle Intent
+  rectangle Behavior
+  rectangle Relationships
+  rectangle Constraints
+  rectangle Accessibility
+  rectangle "Metrics / Testing" as Metrics
+  rectangle Rationale
+}
+database "GitHub Repository\nSource of truth" as GitHub {
+  artifact "Semantic model (YAML / JSON)"
+  artifact Schemas
+  artifact Examples
+  artifact History
+}
+Figma <--> Semantic
+Storybook <--> Semantic
+Code <--> Semantic
+Claude <--> Semantic
+Text <--> Semantic
+note left of Semantic
+  Propose changes
+end note
+note right of Semantic
+  Get context
+end note
+Semantic <--> GitHub
+footer The pixels aren’t the design system. The decisions are.
+@enduml
